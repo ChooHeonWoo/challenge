@@ -22,9 +22,9 @@ const Coin = styled.li`
   border-radius: 15px;
   a {
     padding: 20px;
+    display: flex;
+    align-items: center;
     transition: color 0.2s ease-in;
-    display: block;
-    font-size: 20px;
   }
   &:hover {
     a {
@@ -40,6 +40,11 @@ const Title = styled.h1`
 const Loader = styled.span`
   text-align: center;
   display: block;
+`;
+const Img = styled.img`
+  width: 35px;
+  height: 35px;
+  margin-right: 10px;
 `;
 interface CoinInterface {
   id: string;
@@ -72,7 +77,12 @@ function Coins() {
         <CoinsList>
           {coins.map((coin) => (
             <Coin key={coin.id}>
-              <Link to={`/${coin.id}`}>{coin.name}&rarr;</Link>
+              <Link to={`/${coin.id}`} state={coin.name}>
+                <Img
+                  src={`https://coinicons-api.vercel.app/api/icon/${coin.symbol.toLowerCase()}`}
+                />
+                {coin.name}&rarr;
+              </Link>
             </Coin>
           ))}
         </CoinsList>
